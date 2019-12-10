@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "4.0.2"
+}
+
+version '1.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    shadow fileTree('libs/')
+    shadow "club.minnced:discord-webhooks:0.1.7"
+    shadow 'org.slf4j:slf4j-api:1.7.25'
+    shadow 'org.slf4j:slf4j-simple:1.7.25'
+    shadow 'net.dv8tion:JDA:4.0.0_46'
+    shadow 'org.jsoup:jsoup:1.12.1'
+    shadow 'com.rometools:rome:1.12.2'
+    shadow 'commons-io:commons-io:2.6'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'com.scorchedcode.MarketTrendsBot.MarketTrendsBot'
+    }
+    configurations = [project.configurations.shadow]
+}
